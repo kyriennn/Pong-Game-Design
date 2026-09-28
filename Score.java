@@ -5,7 +5,7 @@ import java.awt.Font;
 public class Score {
     private int leftScore = 0;
     private int rightScore = 0;
-    private static final int WIN_SCORE = 5;
+    private static final int WIN_SCORE = 2;
 
     public Score(){}
 

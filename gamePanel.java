@@ -94,6 +94,7 @@ public class GamePanel extends JPanel implements KeyListener {
             rightPaddle.update();
             ball.update();
             checkCollisions();
+            checkScore();
 
             repaint();
         }
@@ -171,5 +172,32 @@ public class GamePanel extends JPanel implements KeyListener {
             if(ball.getDx() >= 0 && ball.getBounds().intersects(rightPaddle.getBounds())){
                 ball.hitBy(rightPaddle, -1);
             }
+        }
+
+        // check the score to enable scoring system
+        private void checkScore(){
+            int side = 0;
+            // if the ball scored on the left, its x and dx are negative
+            if(ball.getDx() < 0 && ball.getX() + ball.getWidth() < 0){
+                side = -1;
+            }
+            if(ball.getDx() > 0 && ball.getX() > WIDTH){
+                side = 1;
+            }
+            
+            if(side == 0){
+                return;
+            }
+
+            score.addScore(side);
+
+            if(score.hasWinner()){
+                gameOver = true;
+            }
+            else{
+                ball.reset(side);
+            }
+
+            
         }
 }

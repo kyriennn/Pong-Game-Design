@@ -25,13 +25,13 @@ public class Ball extends GameObject{
         y += dy;
 
         // unlike the paddle, the ball can bounce back if it hits the bounds of the game
-        if(y<0 || y > GamePanel.HEIGHT - height){
-            dy = -dy;
+        if(y<0){
+            y = 0;
+            dy = Math.abs(dy);
         }
-
         if(y > GamePanel.HEIGHT - height){
-            y = GamePanel.HEIGHT - height;
-            dy = -dy;
+            y  = GamePanel.HEIGHT - height;
+            dy = -Math.abs(dy);
         }
         // left and right wont be handled here because it involves scoring, so Score class will settle that with GamePanel
     }
@@ -56,8 +56,6 @@ public class Ball extends GameObject{
         reset(RANDOM.nextBoolean() ? 1: -1); 
     }
     public void reset(int side){
-
-
         y = GamePanel.HEIGHT / 2 - height / 2;
         if(side == -1){
             x = GamePanel.WIDTH / 4 - width / 2;
