@@ -13,7 +13,8 @@ public class GameFrame extends JFrame {
         setResizable(false);
 
         // adding the actual game panel (GamePanel object)
-        add(new GamePanel());
+        GamePanel panel = new GamePanel();
+        add(panel);
 
         //size the program window around game panel's size
         pack();
@@ -23,6 +24,8 @@ public class GameFrame extends JFrame {
 
         // make sure its visible ???? shouldnt it be visible by default lol
         setVisible(true);
+
+        panel.requestFocusInWindow();
     }
     
 }
