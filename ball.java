@@ -29,7 +29,19 @@ public class Ball extends GameObject{
             dy = -dy;
         }
 
+        if(y > GamePanel.HEIGHT - height){
+            y = GamePanel.HEIGHT - height;
+            dy = -dy;
+        }
         // left and right wont be handled here because it involves scoring, so Score class will settle that with GamePanel
+    }
+
+    public double getDx() {
+        return dx;
+    }
+
+    public double getDy() {
+        return dy;
     }
 
     @Override

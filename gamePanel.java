@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements KeyListener {
             score.draw(g);
         }
 
-        //gameloop function
+        //gameloop function, this runs every tick (60 times per second)
         private void gameLoop(){
             if(gameOver){
                 repaint();
@@ -93,6 +93,7 @@ public class GamePanel extends JPanel implements KeyListener {
             leftPaddle.update();
             rightPaddle.update();
             ball.update();
+            checkCollisions();
 
             repaint();
         }
@@ -157,5 +158,18 @@ public class GamePanel extends JPanel implements KeyListener {
             int rightX = (rightPressed ? 1 : 0) - (leftPressed ? 1 : 0);
             int rightY = (downPressed ? 1 : 0) - (upPressed ? 1 : 0);
             rightPaddle.setDirection(rightX, rightY);
+        }
+
+        // check how the collisions between the paddle and the ball arise, use in conjunction with hitBy function in Ball class
+        private void checkCollisions(){
+            // left paddle: check that ball moving left or still, and they hit the paddle
+            if(ball.getDx() <= 0 && ball.getBounds().intersects(leftPaddle.getBounds())){
+                ball.hitBy(leftPaddle, 1);
+            }
+
+            //right paddle: check that ball is moving left or still, and they hit the paddle
+            if(ball.getDx() >= 0 && ball.getBounds().intersects(rightPaddle.getBounds())){
+                ball.hitBy(rightPaddle, -1);
+            }
         }
 }
